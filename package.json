@@ -1,0 +1,29 @@
+{
+  "name": "mcq-band",
+  "version": "1.0.0",
+  "description": "Interactive musical interface for MCQ.",
+  "main": "server.js",
+  "dependencies": {
+    "barnowl": "^0.4.28",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "serialport": "^6.1.1",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/izaidi/mcq-band.git"
+  },
+  "author": "Imran Zaidi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izaidi/mcq-band/issues"
+  },
+  "homepage": "https://github.com/izaidi/mcq-band"
+}
