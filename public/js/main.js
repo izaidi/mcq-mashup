@@ -7,7 +7,7 @@ var activeTracks = [];
 var musicRoot = 'music/';
 var defaultParams = {
   mute: true,
-  loop: true,
+  loop: false,
   html5: true,
   buffer: true
 }
@@ -51,6 +51,11 @@ function initMusic() {
     params['onload'] = function() {
       trackLoaded(instrument);
     }
+    if (index == 0) {
+      params['onend'] = function() {
+        loopEnded();
+      }
+    }
     var track = new Howl(params);
     tracks.push(track);
   });
@@ -61,6 +66,10 @@ function trackLoaded(instrument) {
   if (loadedTracks.length == instruments.length) {
     finishLoading();
   }
+}
+
+function loopEnded() {
+  socket.emit('doneLoop', { screen: era });
 }
 
 function beginMusic() {
@@ -166,6 +175,9 @@ function initSocket() {
   socket.on('allLoaded', function (data) {
     console.log('all loaded!');
     $('.waiting').hide();
+    beginMusic();
+  });
+  socket.on('restartLoop', function (data) {
     beginMusic();
   });
   socket.on('reload', function (data) {

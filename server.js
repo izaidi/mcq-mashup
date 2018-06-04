@@ -62,9 +62,11 @@ function stopPlaying(number) {
   io.emit('stop', { instrument: number });
 }
 
+var finishedLoops = [];
 var loadedScreens = [];
 var totalScreens = 2;
 io.on('connection', function (socket) {
+
   socket.on('loaded', function (data) {
     if (loadedScreens.indexOf(data.screen) >= 0) {
       // reload
@@ -77,6 +79,18 @@ io.on('connection', function (socket) {
     if (loadedScreens.length == totalScreens) {
       console.log('all loaded!');
       io.sockets.emit('allLoaded', { screens: totalScreens });
+    }
+  });
+
+  socket.on('doneLoop', function (data) {
+    if (finishedLoops.indexOf(data.screen) >= 0) {
+      return false;
+    }
+    finishedLoops.push(data.screen);
+    if (finishedLoops.length == totalScreens) {
+      console.log('all done playing!');
+      io.sockets.emit('restartLoop');
+      finishedLoops = [];
     }
   });
 });

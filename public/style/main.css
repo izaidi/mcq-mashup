@@ -76,3 +76,21 @@ body {
 	text-align: center;
 	transform: translateY(-50%);
 }
+
+.mlab {
+	background-image: url(mlab.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 100px;
+	position: fixed;
+	bottom: 20px;
+}
+
+.watermark-70s {
+	left: 20px;
+}
+
+.watermark-90s {
+	right: 20px;
+}
